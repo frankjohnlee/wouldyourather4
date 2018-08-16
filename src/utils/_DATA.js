@@ -156,6 +156,21 @@ export function _saveQuestion (question) {
     }, 1000)
   })
 }
+function formatQuestion ({ optionOneText, optionTwoText, author }) {
+  return {
+    id: generateUID(),
+    timestamp: Date.now(),
+    author,
+    optionOne: {
+      votes: [],
+      text: optionOneText,
+    },
+    optionTwo: {
+      votes: [],
+      text: optionTwoText,
+    }
+  }
+}
 
 export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
   return new Promise((res, rej) => {

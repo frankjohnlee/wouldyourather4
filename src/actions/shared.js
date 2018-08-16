@@ -6,7 +6,7 @@ import { setAuthedUser } from "./authedUser";
 
 const AUTHED_ID = 'tylermcginnis';
 
-function handleInitialData(){
+export function handleInitialData(){
     return (dispatch) => {
         return getInitialData().then(({users, questions})=>{
             dispatch(recieveQuestions(questions));
