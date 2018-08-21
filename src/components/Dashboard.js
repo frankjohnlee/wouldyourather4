@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import QuestionCard from "./QuestionCard";
 
 class Dashboard extends Component {
 
 
 
   render() {
-      console.log("Dashboard props", this.props);
     return (
         <div>
-            <div> Dashboard Component </div>
+            <h3 className = 'center'> Your Questions </h3>
+            <ul className= 'dashboard-list'>
+                {
+                    this.props.questionIds.map((id) =>
+                        <li key = {id}>
+                            <QuestionCard key = {`QuestionCard ${id}`} id = {id}/>
+                        </li>
+                    )
+                }
+            </ul>
         </div>
     );
   }
@@ -18,7 +27,7 @@ class Dashboard extends Component {
 }
 function mapStateToProps({ questions }){
     return {
-        questionids: Object.keys(questions)
+        questionIds: Object.keys(questions)
             .sort((a,b) => questions[a].timestamp - questions[b].timestamp)
     }
 
