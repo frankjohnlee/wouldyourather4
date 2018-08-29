@@ -1,8 +1,9 @@
-import { _getUsers, _getQuestions} from "../utils/_DATA";
+import {_saveQuestionAnswer} from "../utils/_DATA";
 import { getInitialData } from "../utils/api";
-import { receiveQuestions } from "./questions";
+import {addAnswer, receiveQuestions} from "./questions";
 import { receiveUsers} from "./users";
 import { setAuthedUser } from "./authedUser";
+import { addUserAnswer } from "./users";
 
 const AUTHED_ID = 'tylermcginnis';
 
@@ -15,4 +16,20 @@ export function handleInitialData(){
         })
     }
 
+}
+
+export function handleAddAnswer(qid, answer){
+     return (dispatch, getState) => {
+        const { authedUser } = getState();
+        return _saveQuestionAnswer({
+            authedUser,
+            qid,
+            answer
+        })
+            .then(
+                () =>
+                    dispatch(addAnswer(authedUser, qid, answer)) &&
+                    dispatch(addUserAnswer(authedUser, qid, answer))
+            ) // Once this is done then add it to our own state
+    }
 }

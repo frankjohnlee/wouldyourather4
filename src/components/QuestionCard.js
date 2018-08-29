@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { handleAddAnswer } from "../actions/questions";
+import { handleAddAnswer } from "../actions/shared";
 
 const CONST_UNANSWERED = "CONST_UNANSWERED";
 const CONST_ANSWERED = "CONST_ANSWERED";
