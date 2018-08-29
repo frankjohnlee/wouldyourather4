@@ -1,9 +1,10 @@
-import { RECIEVE_USER } from "../actions/users";
+import { RECEIVE_USER } from "../actions/users";
+import {ADD_ANSWER} from "../actions/questions";
 
 export function users(state={}, action){
 
     switch (action.type) {
-        case RECIEVE_USER:
+        case RECEIVE_USER:
             return {
                 ...state,
                 ...action.users,

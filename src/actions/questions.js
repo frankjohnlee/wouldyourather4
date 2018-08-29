@@ -11,11 +11,25 @@ export function receiveQuestions(questions){
     }
 }
 
-export function addAnswer({authedUser, qid, answer}){
+export function addAnswer(authedUser, qid, answer){
     return {
         type: ADD_ANSWER,
         authedUser,
         qid,
-        answer,
+        answer
+    }
+}
+
+export function handleAddAnswer(qid, answer){
+     return (dispatch, getState) => {
+        const { authedUser } = getState();
+        return _saveQuestionAnswer({
+            authedUser,
+            qid,
+            answer
+        })
+            .then(
+                () => dispatch(addAnswer(authedUser, qid, answer))
+            ) // Once this is done then add it to our own state
     }
 }
