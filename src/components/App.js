@@ -4,8 +4,21 @@ import './App.css';
 import { handleInitialData } from '../actions/shared'
 import {connect} from 'react-redux';
 import Dashboard from "./Dashboard";
+import {
+  Drawer,
+  DrawerHeader,
+  DrawerContent
+} from 'rmwc/Drawer';
+
+import {
+  List,
+  ListItem,
+  ListItemText
+} from 'rmwc/List';
+import {Col, Grid, Row} from "react-flexbox-grid";
 
 class App extends Component {
+
 
 
   componentDidMount(){
@@ -14,13 +27,34 @@ class App extends Component {
   }
   render() {
     return (
-        <div>
-            {
-                this.props.loading === true
-                    ? null
-                    :  <Dashboard />
-            }
-        </div>
+        <Grid fluid>
+            <Row>
+                <Col xs={3} md={3}>
+                    <Drawer permanent>
+                        <DrawerHeader>
+                            Navigation Bar
+                        </DrawerHeader>
+                        <DrawerContent>
+                            <ListItem>
+                              <ListItemText>Cookies</ListItemText>
+                            </ListItem>
+                            <ListItem>
+                              <ListItemText>Pizza</ListItemText>
+                            </ListItem>
+                            <ListItem>
+                              <ListItemText>Icecream</ListItemText>
+                            </ListItem>
+                        </DrawerContent>
+                    </Drawer>
+                </Col>
+                <Col xs={7} md={7}>
+
+                    <Dashboard />
+
+                </Col>
+            </Row>
+        </Grid>
+
     );
   }
 }

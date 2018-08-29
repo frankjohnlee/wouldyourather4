@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { handleAddAnswer } from "../actions/shared";
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 const CONST_UNANSWERED = "CONST_UNANSWERED";
 const CONST_ANSWERED = "CONST_ANSWERED";
+export const CONST_DETAILS_MODE = "CONST_DETAILS_MODE";
+export const CONST_NORMAL_MODE = "CONST_NORMAL_MODE";
 
 class QuestionCard extends Component {
     constructor(props){
@@ -12,82 +15,146 @@ class QuestionCard extends Component {
             currentMode: CONST_UNANSWERED
         };
 
-        const { currentUser, id } = this.props.currentUser;
-        if (currentUser !== undefined){
-
-            const alreadyVoted = currentUser.questions.indexOf(id) > -1;
-            if (alreadyVoted){ this.state.currentMode = CONST_ANSWERED;}
-            else { this.state.currentMode = CONST_UNANSWERED;}
+        const { currentUser, id } = this.props;
 
 
+        // If the current user has already answered the question then return answered
+        // Another possibility is that this Question Card is in Details Mode
+        if (this.props.mode === CONST_DETAILS_MODE || Object.keys(currentUser.answers).indexOf(id) > -1){
+            this.state.currentMode = CONST_ANSWERED;
         }
 
     }
 
   render() {
         const { currentMode } = this.state;
+        const { id, author } = this.props;
+        const authorName = author.name;
+        const authorURL = author.avatarURL;
         return (
             <div className = "question">
-                {
-                    currentMode ===  CONST_UNANSWERED
-                        ? this.Case1Answered() // CASE 1: The question is unanswered by the authorized user
-                        : this.Case2UnAnswered() // CASE 2: The question is answered so just display the results
-                }
+                 <Grid fluid>
+                    <Row>
+                        <Col xs={4} md={4}>
+                            { this.authorInfo(authorName, authorURL) }
+                        </Col>
+                        <Col xs={1} md={1}></Col>
+                        <Col xs={7} md={7}>
+                               <form>
+                                    <fieldset>
+                                        <legend>What would you rather do?</legend>
+                                            {
+                                                currentMode ===  CONST_UNANSWERED
+                                                    ? this.Case2Unanswered() // CASE 1: The question is unanswered by the authorized user
+                                                    :  this.Case1Answered()// CASE 2: The question is answered so just display the results
+                                            }
+                                    </fieldset>
+                                </form>
+                        </Col>
+                    </Row>
+                  </Grid>
             </div>
 
         );
   }
 
-  Case1Answered(){
-        /* returns the component parts for when a case is answered */
-        const { id, question} = this.props;
+  authorInfo(authorName, authorURL){
+        /* Returns info of the author */
 
+    return(
+        <Grid fluid>
+            <Row>
+                {authorName}
+            </Row>
+            <Row>
+                <img
+                    src={authorURL}
+                    alt={`Avatar of ${authorName}`}
+                    className='avatar'
+                />
+            </Row>
+        </Grid>
+    )
+
+  }
+
+  Case2Unanswered(){
+        /* returns the component parts for when a case is unanswered */
+        const { id, currentUser, question, authedUser } = this.props;
         return (
-            <form>
-                <fieldset>
-                        <legend>What would you rather do?</legend>
-
-                        <div>
-                            <input
-                                type="radio"
-                                id={`radio-button-choice-one-${id}`}
-                                name={`radio-button-name-${id}`}
-                                onChange = {() => this.handleSelection("optionOne")}
-                            />
-                            <label htmlFor="optionOne">{question.optionOne.text}</label>
-                        </div>
-
-                        <div>
-                            <input
-                                type="radio"
-                                id={`radio-button-choice-two-${id}`}
-                                name={`radio-button-name-${id}`}
-                                onChange = {() => this.handleSelection("optionTwo")}/>
-                            <label htmlFor="optionTwo">{question.optionTwo.text}</label>
-                        </div>
-                </fieldset>
-            </form>
+            <div>
+                <div className='pollVote'>
+                    <input
+                        type="radio"
+                        id={`radio-button-choice-one-${id}`}
+                        name={`radio-button-name-${id}`}
+                        onChange = {() => this.handleSelection("optionOne")}
+                    />
+                    <label htmlFor="optionOne">{question.optionOne.text}</label>
+                </div>
+                <div className='pollVote'>
+                    <input
+                        type="radio"
+                        id={`radio-button-choice-two-${id}`}
+                        name={`radio-button-name-${id}`}
+                        onChange = {() => this.handleSelection("optionTwo")}/>
+                    <label htmlFor="optionTwo">{question.optionTwo.text}</label>
+                </div>
+            </div>
         )
   }
 
-  Case2UnAnswered(){
-        /* returns the component parts for when a case is not answered */
-        const { id, currentUser, question, authedUser } = this.props;
+  Case1Answered(){
+        /* returns the component parts for when a case is answered */
+        const { question, currentUser, id } = this.props;
+        // We need the number of people who answered for each option
+        const optionOneCount = question.optionOne.votes.length;
+        const optionTwoCount = question.optionTwo.votes.length;
+        const totalCount = optionOneCount + optionTwoCount;
+        // We need the percentage of people who voted for each option
+        let optionOnePercent = 0;
+        let optionTwoPercent = 0;
+        if (totalCount !== 0){
+            optionOnePercent = Math.round((optionOneCount/totalCount)*100);
+            optionTwoPercent = Math.round((optionTwoCount/totalCount)*100);
+        }
+
+        let stringOneCount = optionOneCount + " friends voted for this option";
+        if (optionOneCount === 1){stringOneCount = stringOneCount.replace("friends", "friend")}
+        let stringTwoCount = optionTwoCount + " friends voted for this option";
+        if (optionTwoCount === 1){stringTwoCount = stringTwoCount.replace("friends", "friend")}
+        const stringOnePercent = optionOnePercent + "% voted for this option";
+        const stringTwoPercent = optionTwoPercent + "% voted for this option";
+
+        // Finally we need to indicate to the user which one he chose
+        let stringChoseOne = "";
+        let StringChosenTwo = "";
+        const answerChosen =  currentUser["answers"][id];
+        if (answerChosen !== undefined){
+            const choseOptionOne = answerChosen === "optionOne";
+            if (choseOptionOne){ stringChoseOne = "You chose this answer."}
+            else {StringChosenTwo = "You chose this answer"}
+        }
+
+
         return (
-               <form>
-                    <fieldset>
-                        <legend>What would you rather do?</legend>
+           <div>
+               <div className='pollDetail'>
+                <label htmlFor="optionOne">{question.optionOne.text}</label>
+                 <br/>
+                 <div className='pollDetailFont'> { stringOneCount }</div>
+                 <div className='pollDetailFont'> { stringOnePercent }</div>
+                 <div className='pollDetailFont'> { stringChoseOne }</div>
+                </div>
 
-                        <div>
-                            <label htmlFor="optionOne">{question.optionOne.text}</label>
-                        </div>
-
-                        <div>
-                            <label htmlFor="optionTwo">{question.optionTwo.text}</label>
-                        </div>
-
-                    </fieldset>
-               </form>
+                <div className='pollDetail'>
+                    <label htmlFor="optionTwo">{question.optionTwo.text}</label>
+                    <br/>
+                    <div className='pollDetailFont'> { stringTwoCount }</div>
+                    <div className='pollDetailFont'> { stringTwoPercent }</div>
+                    <div className='pollDetailFont'> { StringChosenTwo }</div>
+                </div>
+           </div>
         )
   }
 
@@ -99,12 +166,15 @@ class QuestionCard extends Component {
 }
 
 function mapStateToProps({ questions, users, authedUser}, {id}){
+    const question = questions[id];
+    const author = users[question.author];
     return {
-        question: questions[id],
+        question: question,
         currentUser: users[authedUser]
             ? users[authedUser]
             : null,
         authedUser,
+        author: author,
 
     }
 

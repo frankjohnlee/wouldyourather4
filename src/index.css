@@ -1,3 +1,4 @@
+@import "../node_modules/material-components-web/dist/material-components-web.min.css";
 
 body {
   margin: 0;
@@ -161,4 +162,23 @@ li {
   margin-top: 10px;
   font-size: 20px;
   color: #C3392A;
+}
+
+.pollVote {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid white;
+    margin: 0;
+}
+
+.pollDetail {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid dimgray;
+    margin: 0;
+}
+.pollDetailFont {
+    font-size: small;
+    font-style: italic;
+    color: dimgray;
 }

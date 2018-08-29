@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import QuestionCard from "./QuestionCard";
-
+import { CONST_DETAILS_MODE, CONST_NORMAL_MODE } from "./QuestionCard";
+import { Grid, Row, Col } from 'react-flexbox-grid';
 class Dashboard extends Component {
 
 
@@ -9,12 +10,14 @@ class Dashboard extends Component {
   render() {
     return (
         <div>
-            <h3 className = 'center'> Your Questions </h3>
+            <h3 className = 'center'> Would You Rather </h3>
             <ul className= 'dashboard-list'>
                 {
                     this.props.questionIds.map((id) =>
                         <li key = {id}>
-                            <QuestionCard key = {`QuestionCard ${id}`} id = {id}/>
+                            <QuestionCard
+                                mode = { CONST_NORMAL_MODE}
+                                key = {`QuestionCard ${id}`} id = {id}/>
                         </li>
                     )
                 }
