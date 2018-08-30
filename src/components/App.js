@@ -4,17 +4,9 @@ import './App.css';
 import { handleInitialData } from '../actions/shared'
 import {connect} from 'react-redux';
 import Dashboard from "./Dashboard";
-import {
-  Drawer,
-  DrawerHeader,
-  DrawerContent
-} from 'rmwc/Drawer';
-
-import {
-  List,
-  ListItem,
-  ListItemText
-} from 'rmwc/List';
+import { Drawer, DrawerHeader, DrawerContent } from 'rmwc/Drawer';
+import { CONST_All_Questions, CONST_ANSWERED_ONLY, CONST_UNANSWERED_ONLY } from "./Dashboard";
+import { List, ListItem, ListItemText } from 'rmwc/List';
 import {Col, Grid, Row} from "react-flexbox-grid";
 
 class App extends Component {
@@ -32,25 +24,30 @@ class App extends Component {
                 <Col xs={3} md={3}>
                     <Drawer permanent>
                         <DrawerHeader>
-                            Navigation Bar
+                            Menu
                         </DrawerHeader>
                         <DrawerContent>
                             <ListItem>
-                              <ListItemText>Cookies</ListItemText>
+                              <ListItemText>Home</ListItemText>
                             </ListItem>
                             <ListItem>
-                              <ListItemText>Pizza</ListItemText>
+                              <ListItemText>Answered</ListItemText>
                             </ListItem>
                             <ListItem>
-                              <ListItemText>Icecream</ListItemText>
+                              <ListItemText>Unanswered</ListItemText>
+                            </ListItem>
+                            <ListItem>
+                              <ListItemText>All Questions</ListItemText>
                             </ListItem>
                         </DrawerContent>
                     </Drawer>
                 </Col>
                 <Col xs={7} md={7}>
-
-                    <Dashboard />
-
+                        {
+                            this.props.loading === true
+                                ? null
+                                :  <Dashboard mode = {CONST_ANSWERED_ONLY}/>
+                        }
                 </Col>
             </Row>
         </Grid>

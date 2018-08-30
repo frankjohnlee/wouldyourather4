@@ -20,7 +20,8 @@ class QuestionCard extends Component {
 
         // If the current user has already answered the question then return answered
         // Another possibility is that this Question Card is in Details Mode
-        if (this.props.mode === CONST_DETAILS_MODE || Object.keys(currentUser.answers).indexOf(id) > -1){
+        if (this.props.mode === CONST_DETAILS_MODE ||
+            Object.keys(currentUser.answers).indexOf(id) > -1){
             this.state.currentMode = CONST_ANSWERED;
         }
 
