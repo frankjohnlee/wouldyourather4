@@ -28,6 +28,8 @@ class Dashboard extends Component {
     render() {
     return (
         <div>
+            <h3 className = 'center'> Frank's React Web App </h3>
+            <br/>
             <h3 className = 'center'> Would You Rather </h3>
             <ul className= 'dashboard-list'>
                 {

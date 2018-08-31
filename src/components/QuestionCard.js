@@ -171,7 +171,6 @@ class QuestionCard extends Component {
 }
 
 function mapStateToProps({ questions, users, authedUser}, props){
-    console.log(props.match.params);
     let verifiedID = props.id;
     // CASE 0: id is undefined then we are viewing one question only and the id needs to come from url
     if (verifiedID === undefined){
