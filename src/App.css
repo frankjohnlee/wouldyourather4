@@ -1,3 +1,4 @@
+
 .App {
   text-align: center; }
 
@@ -22,3 +23,7 @@
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+
+.navContainer {
+    padding: 1px
+}

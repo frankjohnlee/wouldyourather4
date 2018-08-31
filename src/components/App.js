@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
-
+import { List, ListItem, ListItemGraphic,  ListItemMeta, ListItemText,  ListGroup, ListDivider } from 'rmwc/List';
 import { handleInitialData } from '../actions/shared'
 import {connect} from 'react-redux';
 import Dashboard from "./Dashboard";
-import { Drawer, DrawerHeader, DrawerContent } from 'rmwc/Drawer';
-import { List, ListItem, ListItemText } from 'rmwc/List';
+import { Drawer, DrawerHeader, DrawerContent, DrawerTitle, DrawerSubtitle, DrawerAppContent} from 'rmwc/Drawer';
 import {Col, Grid, Row} from "react-flexbox-grid";
 import { CONST_All_Questions, CONST_ANSWERED_ONLY, CONST_UNANSWERED_ONLY } from "./Dashboard";
 import './App.css';
 import QuestionCard from "./QuestionCard"
-import {
-  Toolbar,
-  ToolbarRow,
-  ToolbarTitle,
-  ToolbarFixedAdjust, ToolbarSection
-} from 'rmwc/Toolbar';
-
+import {Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarMenuIcon, ToolbarIcon, ToolbarFixedAdjust} from 'rmwc/Toolbar';
+import { Card } from 'rmwc/Card'
+import MaterialIcon from '@material/react-material-icon';
 class App extends Component {
-
+    constructor(props){
+        super(props);
+        this.state = {
+            dismissibleOpen: true
+        }
+    }
 
 
   componentDidMount(){
@@ -29,66 +29,86 @@ class App extends Component {
     const { name } = this.props;
     return (
         <Router>
-            <Grid fluid>
-                <Row>
-                    <Col xs={3} md={3}>
-                        <Drawer permanent>
-                        <DrawerContent>
-                            <DrawerHeader>
-                                Menu
-                            </DrawerHeader>
-                                <Link to={'/'}  >
-                                    <ListItem>
-                                      <ListItemText>Home</ListItemText>
-                                    </ListItem>
-                                </Link>
-                                <Link to={'answered'}  >
-                                    <ListItem>
-                                      <ListItemText>Answered</ListItemText>
-                                    </ListItem>
-                                </Link>
-                                <Link to = {'/unanswered'}>
-                                    <ListItem>
-                                      <ListItemText>Unanswered</ListItemText>
-                                    </ListItem>
-                                </Link>
-                                <Link to={'/all'}>
-                                    <ListItem>
-                                      <ListItemText>All Questions</ListItemText>
-                                    </ListItem>
-                                </Link>
-                                <Link to={'/create'}>
-                                    <ListItem>
-                                      <ListItemText>Create</ListItemText>
-                                    </ListItem>
-                                </Link>
-                                <Link to={'/leaderboard'}>
-                                    <ListItem>
-                                      <ListItemText>Leaderboard</ListItemText>
-                                    </ListItem>
-                                </Link>
-                                <Link to={'/logout'}>
-                                    <ListItem>
-                                      <ListItemText>Logout</ListItemText>
-                                    </ListItem>
-                                </Link>
-
-                            </DrawerContent>
-                        </Drawer>
-                    </Col>
-                    <Col xs={7} md={7}>
-                  <Toolbar fixed>
+            <div>
+            <Toolbar >
                       <ToolbarRow>
                             <ToolbarSection alignStart>
+                                  <ToolbarMenuIcon icon="comment"/>
                                 <ToolbarTitle>Would You Rather</ToolbarTitle>
                              </ToolbarSection>
                              <ToolbarSection alignEnd>
+                                   <ToolbarMenuIcon icon="how_to_reg"/>
                                  <ToolbarTitle>{ name } </ToolbarTitle>
+
                              </ToolbarSection>
                         </ToolbarRow>
 
-                        </Toolbar>
-                    <ToolbarFixedAdjust />
+                </Toolbar>
+                <ToolbarFixedAdjust />
+            <Grid fluid>
+                <Row>
+                    <Col xs={3} md={3}>
+                        <Card>
+                        <DrawerContent>
+                                <ListDivider />
+                                <Link to={'/'}  >
+                                    <ListItem>
+                                           <ListItemGraphic icon="home"/>
+                                            Home
+                                    </ListItem>
+                                </Link>
+                                <ListDivider />
+                                <Link to={'answered'}  >
+                                    <ListItem>
+                                        <ListItemGraphic icon="favorite"/>
+                                          Answered
+                                    </ListItem>
+                                </Link>
+                                <ListDivider />
+                                <Link to = {'/unanswered'}>
+                                    <ListItem>
+                                        <ListItemGraphic icon = "favorite_border"/>
+                                        Unanswered
+                                    </ListItem>
+                                </Link>
+                                <ListDivider />
+                                <Link to={'/all'}>
+                                    <ListItem>
+                                        <ListItemGraphic icon = "group_work"/>
+                                        All
+                                    </ListItem>
+                                </Link>
+                                <ListDivider />
+                                <Link to={'/create'}>
+                                     <ListItem>
+                                        <ListItemGraphic icon = "add"/>
+                                        New Question
+                                    </ListItem>
+                                </Link>
+                                <ListDivider />
+                                <Link to={'/leaderboard'}>
+                                    <ListItem>
+                                        <ListItemGraphic icon = "bar_chart"/>
+                                        Leaderboard
+                                    </ListItem>
+                                </Link>
+                                <ListDivider />
+                                <Link to={'/logout'}>
+                                    <ListItem>
+                                        <ListItemGraphic icon = "verified_user"/>
+                                        Logout
+                                    </ListItem>
+                                </Link>
+                                <ListDivider />
+
+
+                            </DrawerContent>
+                        </Card>
+
+                    </Col>
+                    <Col xs={7} md={7}>
+
+
                             {
                                 this.props.loading === true
                                     ? null
@@ -104,6 +124,7 @@ class App extends Component {
                     </Col>
                 </Row>
             </Grid>
+            </div>
         </Router>
 
     );

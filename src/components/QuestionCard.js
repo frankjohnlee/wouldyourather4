@@ -186,6 +186,7 @@ function mapStateToProps({ questions, users, authedUser}, props){
             : null,
         authedUser,
         author: author,
+        id: verifiedID
 
     }
 

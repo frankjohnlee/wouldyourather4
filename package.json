@@ -5,6 +5,7 @@
   "dependencies": {
     "@material/card": "^0.38.1",
     "@material/checkbox": "^0.38.1",
+    "@material/react-material-icon": "^0.4.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-flexbox-grid": "^2.1.2",
