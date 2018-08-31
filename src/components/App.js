@@ -10,6 +10,13 @@ import {Col, Grid, Row} from "react-flexbox-grid";
 import { CONST_All_Questions, CONST_ANSWERED_ONLY, CONST_UNANSWERED_ONLY } from "./Dashboard";
 import './App.css';
 import QuestionCard from "./QuestionCard"
+import {
+  Toolbar,
+  ToolbarRow,
+  ToolbarTitle,
+  ToolbarFixedAdjust, ToolbarSection
+} from 'rmwc/Toolbar';
+
 class App extends Component {
 
 
@@ -19,7 +26,7 @@ class App extends Component {
       this.props.dispatch(handleInitialData())
   }
   render() {
-      const unasweredOnlyComponent = <Dashboard mode = { CONST_UNANSWERED_ONLY}/>;
+    const { name } = this.props;
     return (
         <Router>
             <Grid fluid>
@@ -59,6 +66,18 @@ class App extends Component {
                         </Drawer>
                     </Col>
                     <Col xs={7} md={7}>
+                  <Toolbar fixed>
+                      <ToolbarRow>
+                            <ToolbarSection alignStart>
+                                <ToolbarTitle>Would You Rather</ToolbarTitle>
+                             </ToolbarSection>
+                             <ToolbarSection alignEnd>
+                                 <ToolbarTitle>{ name } </ToolbarTitle>
+                             </ToolbarSection>
+                        </ToolbarRow>
+
+                        </Toolbar>
+                    <ToolbarFixedAdjust />
                             {
                                 this.props.loading === true
                                     ? null
@@ -79,14 +98,17 @@ class App extends Component {
     );
   }
 
-  dashboardUnasweredOnly(){
-      return
-  }
+
 }
 
-function mapStateToProps({authedUser}){
+function mapStateToProps({authedUser, users}){
+    let name = "";
+    if (users[authedUser] !== undefined){
+        name = users[authedUser].name;
+    }
    return {
        loading: authedUser === null,
+       name: name
    }
 }
 
