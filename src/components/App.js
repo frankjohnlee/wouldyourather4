@@ -57,11 +57,22 @@ class App extends Component {
                                       <ListItemText>All Questions</ListItemText>
                                     </ListItem>
                                 </Link>
+                                <Link to={'/create'}>
+                                    <ListItem>
+                                      <ListItemText>Create</ListItemText>
+                                    </ListItem>
+                                </Link>
+                                <Link to={'/leaderboard'}>
+                                    <ListItem>
+                                      <ListItemText>Leaderboard</ListItemText>
+                                    </ListItem>
+                                </Link>
                                 <Link to={'/logout'}>
                                     <ListItem>
                                       <ListItemText>Logout</ListItemText>
                                     </ListItem>
                                 </Link>
+
                             </DrawerContent>
                         </Drawer>
                     </Col>
