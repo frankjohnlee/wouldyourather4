@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { handleAddAnswer } from "../actions/shared";
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Link, withRouter } from "react-router-dom"
 
 const CONST_UNANSWERED = "CONST_UNANSWERED";
 const CONST_ANSWERED = "CONST_ANSWERED";
@@ -33,7 +34,10 @@ class QuestionCard extends Component {
         const authorName = author.name;
         const authorURL = author.avatarURL;
         return (
-            <div className = "question">
+            <Link
+                className = "question"
+                to = {`/question/${id}`}
+            >
                  <Grid fluid>
                     <Row>
                         <Col xs={4} md={4}>
@@ -54,7 +58,7 @@ class QuestionCard extends Component {
                         </Col>
                     </Row>
                   </Grid>
-            </div>
+            </Link>
 
         );
   }
@@ -166,8 +170,15 @@ class QuestionCard extends Component {
   }
 }
 
-function mapStateToProps({ questions, users, authedUser}, {id}){
-    const question = questions[id];
+function mapStateToProps({ questions, users, authedUser}, props){
+    console.log(props.match.params);
+    let verifiedID = props.id;
+    // CASE 0: id is undefined then we are viewing one question only and the id needs to come from url
+    if (verifiedID === undefined){
+        verifiedID = props.match.params.id; // this gets the id from the url since it's formatted id:alksjdlskajd92j
+    }
+
+    const question = questions[verifiedID];
     const author = users[question.author];
     return {
         question: question,
@@ -181,4 +192,4 @@ function mapStateToProps({ questions, users, authedUser}, {id}){
 
 
 }
-export default connect(mapStateToProps)(QuestionCard);
+export default withRouter(connect(mapStateToProps)(QuestionCard));
