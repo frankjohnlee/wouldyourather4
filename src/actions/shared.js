@@ -5,7 +5,7 @@ import { receiveUsers} from "./users";
 import { setAuthedUser } from "./authedUser";
 import { addUserAnswer } from "./users";
 
-const AUTHED_ID = 'tylermcginnis';
+const AUTHED_ID = null;
 
 export function handleInitialData(){
     return (dispatch) => {

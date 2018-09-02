@@ -136,13 +136,13 @@ export function _getQuestions () {
 export function _saveQuestion (question) {
   return new Promise((res, rej) => {
     const authedUser = question.author;
-    const formattedQuestion = formatQuestion(question)
+    const formattedQuestion = formatQuestion(question);
 
     setTimeout(() => {
       questions = {
         ...questions,
         [formattedQuestion.id]: formattedQuestion
-      }
+      };
       
       users = {
         ...users,
@@ -150,7 +150,7 @@ export function _saveQuestion (question) {
           ...users[authedUser],
           questions: users[authedUser].questions.concat([formattedQuestion.id])
         }
-      }
+      };
 
       res(formattedQuestion)
     }, 1000)

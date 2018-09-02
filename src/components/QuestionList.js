@@ -7,7 +7,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 export const CONST_All_Questions = "CONST_ALL_QUESTIONS";
 export const CONST_UNANSWERED_ONLY = "CONST_UNANSWERED_ONLY";
 export const CONST_ANSWERED_ONLY = "CONST_ANSWERED_ONLY";
-class Dashboard extends Component {
+class QuestionList extends Component {
 
     constructor(props){
         super(props);
@@ -34,7 +34,8 @@ class Dashboard extends Component {
                         <li key = {id}>
                             <QuestionCard
                                 mode = { CONST_NORMAL_MODE}
-                                key = {`QuestionCard ${id}`} id = {id}/>
+                                key = {`QuestionCard ${id}`}
+                                id = {id}/>
                         </li>
                     )
                 }
@@ -54,4 +55,4 @@ function mapStateToProps({ questions, users, authedUser }){
     }
 
 }
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(QuestionList);

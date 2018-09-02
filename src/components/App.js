@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, NavLink} from 'react-router-dom'
 import { List, ListItem, ListItemGraphic,  ListItemMeta, ListItemText,  ListGroup, ListDivider } from 'rmwc/List';
 import { handleInitialData } from '../actions/shared'
 import {connect} from 'react-redux';
-import Dashboard from "./Dashboard";
+import Dashboard from "./QuestionList";
 import { Drawer, DrawerHeader, DrawerContent, DrawerTitle, DrawerSubtitle, DrawerAppContent} from 'rmwc/Drawer';
 import {Col, Grid, Row} from "react-flexbox-grid";
-import { CONST_All_Questions, CONST_ANSWERED_ONLY, CONST_UNANSWERED_ONLY } from "./Dashboard";
+import { CONST_All_Questions, CONST_ANSWERED_ONLY, CONST_UNANSWERED_ONLY } from "./QuestionList";
 import './App.css';
 import QuestionCard from "./QuestionCard"
 import {Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarMenuIcon, ToolbarIcon, ToolbarFixedAdjust} from 'rmwc/Toolbar';
 import { Card } from 'rmwc/Card'
 import MaterialIcon from '@material/react-material-icon';
+import Login from './Login'
 class App extends Component {
     constructor(props){
         super(props);
@@ -26,7 +27,12 @@ class App extends Component {
       this.props.dispatch(handleInitialData())
   }
   render() {
-    const { name } = this.props;
+    const { name, authedUser } = this.props;
+    let loginText = "Logout";
+    if (authedUser === null){
+       loginText = "Login"
+    }
+
     return (
         <Router>
             <div>
@@ -51,54 +57,54 @@ class App extends Component {
                         <Card>
                         <DrawerContent>
                                 <ListDivider />
-                                <Link to={'/'}  >
+                                <NavLink to={'/'}  >
                                     <ListItem>
                                            <ListItemGraphic icon="home"/>
                                             Home
                                     </ListItem>
-                                </Link>
+                                </NavLink>
                                 <ListDivider />
-                                <Link to={'answered'}  >
+                                <NavLink to={'answered'}  >
                                     <ListItem>
                                         <ListItemGraphic icon="favorite"/>
                                           Answered
                                     </ListItem>
-                                </Link>
+                                </NavLink>
                                 <ListDivider />
-                                <Link to = {'/unanswered'}>
+                                <NavLink to = {'/unanswered'}>
                                     <ListItem>
                                         <ListItemGraphic icon = "favorite_border"/>
                                         Unanswered
                                     </ListItem>
-                                </Link>
+                                </NavLink>
                                 <ListDivider />
-                                <Link to={'/all'}>
+                                <NavLink to={'/all'}>
                                     <ListItem>
                                         <ListItemGraphic icon = "group_work"/>
                                         All
                                     </ListItem>
-                                </Link>
+                                </NavLink>
                                 <ListDivider />
-                                <Link to={'/create'}>
+                                <NavLink to={'/create'}>
                                      <ListItem>
                                         <ListItemGraphic icon = "add"/>
                                         New Question
                                     </ListItem>
-                                </Link>
+                                </NavLink>
                                 <ListDivider />
-                                <Link to={'/leaderboard'}>
+                                <NavLink to={'/leaderboard'}>
                                     <ListItem>
                                         <ListItemGraphic icon = "bar_chart"/>
                                         Leaderboard
                                     </ListItem>
-                                </Link>
+                                </NavLink>
                                 <ListDivider />
-                                <Link to={'/logout'}>
+                                <NavLink to={'/logout-login'}>
                                     <ListItem>
                                         <ListItemGraphic icon = "verified_user"/>
-                                        Logout
+                                        { loginText }
                                     </ListItem>
-                                </Link>
+                                </NavLink>
                                 <ListDivider />
 
 
@@ -111,7 +117,7 @@ class App extends Component {
 
                             {
                                 this.props.loading === true
-                                    ? null
+                                    ? <Login />
                                     :
                                         <div>
                                             <Route path = '/' exact render={()=><Dashboard mode = { CONST_UNANSWERED_ONLY }/>}/>
@@ -119,6 +125,7 @@ class App extends Component {
                                             <Route path = '/unanswered'  render={()=><Dashboard mode = { CONST_UNANSWERED_ONLY }/>}/>
                                             <Route path = '/all'  render={()=><Dashboard mode = {CONST_All_Questions}/>}/>
                                             <Route path = '/question/:id'  render={()=><QuestionCard mode = { CONST_ANSWERED_ONLY }/>}/>
+                                            <Route path = '/logout-login'  render={()=><Login/>}/>
                                         </div>
                             }
                     </Col>
@@ -140,7 +147,8 @@ function mapStateToProps({authedUser, users}){
     }
    return {
        loading: authedUser === null,
-       name: name
+       name: name,
+       authedUser
    }
 }
 

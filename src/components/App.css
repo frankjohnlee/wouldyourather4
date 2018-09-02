@@ -28,3 +28,8 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.loginCards {
+    float:left;
+    padding: 30px;
+}
