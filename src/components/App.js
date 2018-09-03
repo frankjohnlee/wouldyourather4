@@ -13,6 +13,7 @@ import {Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarMenuIcon, Tool
 import { Card } from 'rmwc/Card'
 import MaterialIcon from '@material/react-material-icon';
 import Login from './Login'
+import CreateQuestion from './CreateQuestion'
 class App extends Component {
     constructor(props){
         super(props);
@@ -126,6 +127,7 @@ class App extends Component {
                                             <Route path = '/all'  render={()=><Dashboard mode = {CONST_All_Questions}/>}/>
                                             <Route path = '/question/:id'  render={()=><QuestionCard mode = { CONST_ANSWERED_ONLY }/>}/>
                                             <Route path = '/logout-login'  render={()=><Login/>}/>
+                                            <Route path = '/create'  render={()=><CreateQuestion/>}/>
                                         </div>
                             }
                     </Col>

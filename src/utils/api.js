@@ -14,3 +14,8 @@ export function getInitialData(){
             questions,
         }))
 }
+
+export function saveQuestion(question) {
+    console.log("saveQuestion() input: ", question);
+  return _saveQuestion(question);
+}

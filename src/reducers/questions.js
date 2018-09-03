@@ -1,6 +1,7 @@
-import { ADD_QUESTION, ADD_ANSWER } from "../actions/questions";
+import { ADD_QUESTION, ADD_ANSWER, ADD_NEW_QUESTION } from "../actions/questions";
 
 export function questions(state={}, action){
+    console.log(action);
     switch (action.type){
         case ADD_QUESTION:
             return {
@@ -29,7 +30,11 @@ export function questions(state={}, action){
                     }
                 }
             };
-
+        case ADD_NEW_QUESTION:
+            return {
+                ...state,
+                [action.question.id]: action.question
+            };
         default:
             return state;
     }
