@@ -55,7 +55,7 @@ class CreateQuestion extends React.Component {
         )
     }
     handleSubmit(){
-        addNewQuestion(this.state.optionOne, this.state.optionTwo);
+        this.props.dispatch(addNewQuestion(this.state.optionOne, this.state.optionTwo))
     }
 
 
