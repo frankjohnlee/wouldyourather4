@@ -1,3 +1,4 @@
+
 let users = {
   sarahedo: {
     id: 'sarahedo',
@@ -16,8 +17,8 @@ let users = {
     name: 'Tyler McGinnis',
     avatarURL: 'https://www.telegraph.co.uk/content/dam/pets/2017/01/06/1-JS117202740-yana-two-face-cat-news_trans_NvBQzQNjv4BqJNqHJA5DVIMqgv_1zKR2kxRY9bnFVTp4QZlQjJfe6H0.jpg',
     answers: {
-      "8xf0y6ziyjabvozdd253nd": 'optionOne',
-
+      "vthrdm985a262al8qx3do": 'optionOne',
+      "xj352vofupe1dqz9emx13r": 'optionTwo',
     },
     questions: ['loxhs1bqm25b708cmbf3g', 'vthrdm985a262al8qx3do'],
   },
@@ -114,6 +115,7 @@ let questions = {
     }
   },
 }
+
 
 function generateUID () {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
