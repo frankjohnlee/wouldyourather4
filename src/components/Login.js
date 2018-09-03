@@ -31,7 +31,7 @@ class Login extends React.Component {
     }
     makeLoginCard(user){
         return(
-            <div
+            <NavLink
                 to={'/'}
                 value = {`${user}`}
                 onClick = {(e) => this.handleSelection(user)}
@@ -67,7 +67,7 @@ class Login extends React.Component {
                   </CardPrimaryAction>
                 </Card>
              </div>
-            </div>
+            </NavLink>
             )
 
     }
