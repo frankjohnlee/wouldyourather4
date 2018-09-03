@@ -5,7 +5,7 @@ import { receiveUsers} from "./users";
 import { setAuthedUser } from "./authedUser";
 import { addUserAnswer } from "./users";
 
-const AUTHED_ID = "sarahedo"; // should be set to null requiring login
+const AUTHED_ID = null; // should be set to null requiring login
 
 export function handleInitialData(){
     return (dispatch) => {

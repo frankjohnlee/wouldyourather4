@@ -179,6 +179,7 @@ function mapStateToProps({ questions, users, authedUser}, props){
 
     const question = questions[verifiedID];
     const author = users[question.author];
+
     return {
         question: question,
         currentUser: users[authedUser]

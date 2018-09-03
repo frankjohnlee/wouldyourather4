@@ -58,54 +58,54 @@ class App extends Component {
                         <Card>
                         <DrawerContent>
                                 <ListDivider />
-                                <NavLink to={'/'}  >
+                                <Link to={'/'}  >
                                     <ListItem>
                                            <ListItemGraphic icon="home"/>
                                             Home
                                     </ListItem>
-                                </NavLink>
+                                </Link>
                                 <ListDivider />
-                                <NavLink to={'answered'}  >
+                                <Link to={'answered'}  >
                                     <ListItem>
                                         <ListItemGraphic icon="favorite"/>
                                           Answered
                                     </ListItem>
-                                </NavLink>
+                                </Link>
                                 <ListDivider />
-                                <NavLink to = {'/unanswered'}>
+                                <Link to = {'/unanswered'}>
                                     <ListItem>
                                         <ListItemGraphic icon = "favorite_border"/>
                                         Unanswered
                                     </ListItem>
-                                </NavLink>
+                                </Link>
                                 <ListDivider />
-                                <NavLink to={'/all'}>
+                                <Link to={'/all'}>
                                     <ListItem>
                                         <ListItemGraphic icon = "group_work"/>
                                         All
                                     </ListItem>
-                                </NavLink>
+                                </Link>
                                 <ListDivider />
-                                <NavLink to={'/create'}>
+                                <Link to={'/create'}>
                                      <ListItem>
                                         <ListItemGraphic icon = "add"/>
                                         New Question
                                     </ListItem>
-                                </NavLink>
+                                </Link>
                                 <ListDivider />
-                                <NavLink to={'/leaderboard'}>
+                                <Link to={'/leaderboard'}>
                                     <ListItem>
                                         <ListItemGraphic icon = "bar_chart"/>
                                         Leaderboard
                                     </ListItem>
-                                </NavLink>
+                                </Link>
                                 <ListDivider />
-                                <NavLink to={'/logout-login'}>
+                                <Link to={'/logout-login'}>
                                     <ListItem>
                                         <ListItemGraphic icon = "verified_user"/>
                                         { loginText }
                                     </ListItem>
-                                </NavLink>
+                                </Link>
                                 <ListDivider />
 
 
