@@ -74,10 +74,8 @@ class Login extends React.Component {
 
     handleSelection(user){
         const { dispatch } = this.props;
-        const id = { user };
-        console.log("id", id);
-        console.log("setAuthedUser(id)", setAuthedUser(id));
-        dispatch(authedUser(setAuthedUser(id)));
+        const { id } = user;
+        dispatch(setAuthedUser(id));
     }
 };
 
