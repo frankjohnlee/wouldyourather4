@@ -7,6 +7,7 @@ import Dashboard from "./QuestionList";
 import { Drawer, DrawerHeader, DrawerContent, DrawerTitle, DrawerSubtitle, DrawerAppContent} from 'rmwc/Drawer';
 import {Col, Grid, Row} from "react-flexbox-grid";
 import { CONST_All_Questions, CONST_ANSWERED_ONLY, CONST_UNANSWERED_ONLY } from "./QuestionList";
+import { CONST_DETAILS_MODE } from "./QuestionCard"
 import './App.css';
 import QuestionCard from "./QuestionCard"
 import {Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarMenuIcon, ToolbarIcon, ToolbarFixedAdjust} from 'rmwc/Toolbar';
@@ -125,7 +126,7 @@ class App extends Component {
                                             <Route path = '/answered'  render={()=><Dashboard mode = { CONST_ANSWERED_ONLY }/>}/>
                                             <Route path = '/unanswered'  render={()=><Dashboard mode = { CONST_UNANSWERED_ONLY }/>}/>
                                             <Route path = '/all'  render={()=><Dashboard mode = {CONST_All_Questions}/>}/>
-                                            <Route path = '/question/:id'  render={()=><QuestionCard mode = { CONST_ANSWERED_ONLY }/>}/>
+                                            <Route path = '/question/:id'  render={()=><QuestionCard mode = { CONST_DETAILS_MODE }/>}/>
                                             <Route path = '/logout-login'  render={()=><Login/>}/>
                                             <Route path = '/create'  render={()=><CreateQuestion/>}/>
                                         </div>
