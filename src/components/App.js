@@ -19,7 +19,8 @@ class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            dismissibleOpen: true
+            dismissibleOpen: true,
+            latestQuestionId: ""
         }
     }
 
@@ -66,7 +67,7 @@ class App extends Component {
                                     </ListItem>
                                 </Link>
                                 <ListDivider />
-                                <Link to={'answered'}  >
+                                <Link to={'/answered'}  >
                                     <ListItem>
                                         <ListItemGraphic icon="favorite"/>
                                           Answered
@@ -139,7 +140,6 @@ class App extends Component {
 
     );
   }
-
 
 }
 

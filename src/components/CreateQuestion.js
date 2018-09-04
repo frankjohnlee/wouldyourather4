@@ -8,14 +8,15 @@ import { setAuthedUser } from "../actions/authedUser";
 import {Col, Grid, Row} from "react-flexbox-grid";
 import { Button, ButtonIcon } from 'rmwc/Button';
 import { addNewQuestion } from "../actions/questions";
-
+import { Snackbar } from 'rmwc/Snackbar';
 class CreateQuestion extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             question: "",
             optionOne: "",
-            optionTwo: ""
+            optionTwo: "",
+            snackbarStartIsOpen: false
         }
 
     }
@@ -28,13 +29,13 @@ class CreateQuestion extends React.Component {
 
                  <h3> Create Question in the format of would you rather </h3>
                  <textarea
-                    placeholder= "The first option here"
+                    placeholder= "Option 1"
                     value = {optionOne}
                     onChange = {this.handleOptionOneChange}
                     className = 'textarea'
                 />
                                  <textarea
-                    placeholder= "The second option here"
+                    placeholder= "Option 2"
                     value = {optionTwo}
                     onChange = {this.handleOptionTwoChange}
                     className = 'textarea'
@@ -44,18 +45,32 @@ class CreateQuestion extends React.Component {
                 </div>
                 <div>
                     <br/><br/>
-                    <Button outlined
-                     onClick = {() => this.handleSubmit()}>
-                        Add Question
-                    </Button>
+                        <Button outlined
+                         onClick = {() => this.handleSubmit()}>
+                            Add Question
+                        </Button>
                 </div>
                 </center>
+                <Snackbar
+                  show={this.state.snackbarStartIsOpen}
+                  onHide={evt => this.setState({snackbarStartIsOpen: false})}
+                  message="Your question was successfully created!"
+                  actionText="Dismiss"
+                  actionHandler={() => {}}
+                  alignStart
+                />
             </div>
 
         )
     }
     handleSubmit(){
-        this.props.dispatch(addNewQuestion(this.state.optionOne, this.state.optionTwo))
+        this.props.dispatch(addNewQuestion(this.state.optionOne, this.state.optionTwo));
+        this.setState({
+            question: "",
+            optionOne: "",
+            optionTwo: "",
+            snackbarStartIsOpen: true
+        })
     }
 
 
