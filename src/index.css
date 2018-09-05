@@ -1,5 +1,4 @@
 
-
 body {
   margin: 0;
   padding: 0;
@@ -165,14 +164,13 @@ li {
 }
 
 .pollVote {
-    width: 300px;
+
     padding: 10px;
     border: 1px solid white;
     margin: 0;
 }
 
 .pollDetail {
-    width: 300px;
     padding: 10px;
     border: 1px solid dimgray;
     margin: 0;

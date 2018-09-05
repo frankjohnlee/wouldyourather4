@@ -9,6 +9,8 @@ import {Col, Grid, Row} from "react-flexbox-grid";
 import { Button, ButtonIcon } from 'rmwc/Button';
 import { addNewQuestion } from "../actions/questions";
 import { Snackbar } from 'rmwc/Snackbar';
+import TextField, {HelperText, Input} from '@material/react-text-field';
+
 class CreateQuestion extends React.Component {
     constructor(props){
         super(props);
@@ -28,27 +30,30 @@ class CreateQuestion extends React.Component {
                 <div>
 
                  <h3> Create Question in the format of would you rather </h3>
-                 <textarea
-                    placeholder= "Option 1"
+                <TextField
+                  label='Option 1'
+                  helperText={<HelperText>Type something for the first option</HelperText>}>
+                  <Input
                     value = {optionOne}
-                    onChange = {this.handleOptionOneChange}
-                    className = 'textarea'
-                />
-                                 <textarea
-                    placeholder= "Option 2"
+                     onChange = {this.handleOptionOneChange}/>
+                </TextField>
+                 <TextField
+                  label='Option 2'
+                  helperText={<HelperText>Type something for the second option</HelperText>}>
+                  <Input
                     value = {optionTwo}
-                    onChange = {this.handleOptionTwoChange}
-                    className = 'textarea'
-                />
-
+                      onChange = {this.handleOptionTwoChange}/>
+                </TextField>
 
                 </div>
                 <div>
                     <br/><br/>
-                        <Button outlined
-                         onClick = {() => this.handleSubmit()}>
-                            Add Question
-                        </Button>
+                        <NavLink to={"/"}>
+                            <Button outlined
+                             onClick = {() => this.handleSubmit()}>
+                                Add Question
+                            </Button>
+                        </NavLink>
                 </div>
                 </center>
                 <Snackbar
@@ -65,6 +70,7 @@ class CreateQuestion extends React.Component {
     }
     handleSubmit(){
         this.props.dispatch(addNewQuestion(this.state.optionOne, this.state.optionTwo));
+        this.props.reloadData();
         this.setState({
             question: "",
             optionOne: "",

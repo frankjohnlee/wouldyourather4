@@ -1,5 +1,5 @@
 @import '../../node_modules/material-components-web/dist/material-components-web.min.css';
-
+@import '../../node_modules/@material/react-text-field/dist/text-field.css';
 .App {
   text-align: center;
 }
@@ -32,4 +32,8 @@
 .loginCards {
     float:left;
     padding: 30px;
+}
+
+.mdc-text-field__input {
+  box-sizing: initial;
 }
