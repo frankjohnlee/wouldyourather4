@@ -85,7 +85,7 @@ class QuestionCard extends Component {
 
   Case2Unanswered(){
         /* returns the component parts for when a case is unanswered */
-        const { id, currentUser, question, authedUser } = this.props;
+        const { id, question } = this.props;
         return (
             <div>
                 <div className='pollVote'>

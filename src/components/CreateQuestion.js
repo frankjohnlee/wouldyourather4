@@ -1,21 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-import { Card, CardMedia, CardPrimaryAction, CardMediaContent} from 'rmwc/Card';
-import { Typography } from 'rmwc/Typography';
-import {Link, NavLink, withRouter} from "react-router-dom";
-import { authedUser } from "../reducers/authedUser";
-import { setAuthedUser } from "../actions/authedUser";
-import {Col, Grid, Row} from "react-flexbox-grid";
-import { Button, ButtonIcon } from 'rmwc/Button';
-import { addNewQuestion } from "../actions/questions";
-import { Snackbar } from 'rmwc/Snackbar';
+import {NavLink} from "react-router-dom";
+import {Button} from 'rmwc/Button';
+import {addNewQuestion} from "../actions/questions";
 import TextField, {HelperText, Input} from '@material/react-text-field';
 
 class CreateQuestion extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            question: "",
             optionOne: "",
             optionTwo: "",
             snackbarStartIsOpen: false
@@ -23,7 +16,7 @@ class CreateQuestion extends React.Component {
 
     }
     render(){
-        const { question, optionOne, optionTwo } = this.state;
+        const {  optionOne, optionTwo } = this.state;
         return (
             <div>
                 <center>
@@ -65,7 +58,6 @@ class CreateQuestion extends React.Component {
         this.props.dispatch(addNewQuestion(this.state.optionOne, this.state.optionTwo));
         this.props.reloadData();
         this.setState({
-            question: "",
             optionOne: "",
             optionTwo: "",
         })

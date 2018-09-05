@@ -3,7 +3,7 @@ import {Col, Grid, Row} from "react-flexbox-grid";
 import Dashboard, {CONST_ANSWERED_ONLY, CONST_UNANSWERED_ONLY} from "./QuestionList";
 import connect from "react-redux/es/connect/connect";
 
-class AnsweredAndUnAnswered extends React.Component{
+class AnsweredAndUnAnswered extends Component {
 
     render(){
 

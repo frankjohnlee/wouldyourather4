@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, NavLink, Switch } from 'react-router-dom'
-import { List, ListItem, ListItemGraphic,  ListItemMeta, ListItemText,  ListGroup, ListDivider } from 'rmwc/List';
-import { handleInitialData } from '../actions/shared'
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
+import {ListDivider, ListItem, ListItemGraphic} from 'rmwc/List';
+import {handleInitialData} from '../actions/shared'
 import {connect} from 'react-redux';
-import Dashboard from "./QuestionList";
-import { Drawer, DrawerHeader, DrawerContent, DrawerTitle, DrawerSubtitle, DrawerAppContent} from 'rmwc/Drawer';
+import Dashboard, {CONST_ANSWERED_ONLY, CONST_UNANSWERED_ONLY} from "./QuestionList";
+import {DrawerContent} from 'rmwc/Drawer';
 import {Col, Grid, Row} from "react-flexbox-grid";
-import { CONST_All_Questions, CONST_ANSWERED_ONLY, CONST_UNANSWERED_ONLY } from "./QuestionList";
-import { CONST_DETAILS_MODE } from "./QuestionCard"
+import QuestionCard, {CONST_DETAILS_MODE} from "./QuestionCard"
 import './App.css';
-import QuestionCard from "./QuestionCard"
-import {Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarMenuIcon, ToolbarIcon, ToolbarFixedAdjust} from 'rmwc/Toolbar';
-import { Card } from 'rmwc/Card'
-import MaterialIcon from '@material/react-material-icon';
+import {Toolbar, ToolbarFixedAdjust, ToolbarMenuIcon, ToolbarRow, ToolbarSection, ToolbarTitle} from 'rmwc/Toolbar';
+import {Card} from 'rmwc/Card'
 import Login from './Login'
 import CreateQuestion from './CreateQuestion'
 import AnsweredAndUnAnswered from "./AnsweredAndUnAnswered"
 import {Snackbar} from "rmwc/Snackbar";
 import Leaderboard from "./Leaderboard"
+
 class App extends Component {
 	constructor(props){
 		super(props);

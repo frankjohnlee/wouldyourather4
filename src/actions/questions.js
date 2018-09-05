@@ -1,6 +1,4 @@
-import { formatQuestion } from "../utils/_DATA";
-import { saveQuestion } from "../utils/api";
-import {addUserAnswer} from "./users";
+import {_saveQuestion} from "../utils/_DATA";
 
 export const ADD_QUESTION = "ADD_QUESTION";
 export const ADD_ANSWER = "ADD_ANSWER";
@@ -33,7 +31,7 @@ export function newQuestion(question){
 export function addNewQuestion(optionOneText, optionTwoText){
       return (dispatch, getState) => {
         const { authedUser } = getState();
-         return saveQuestion({
+         return _saveQuestion({
               author: authedUser,
               optionOneText,
               optionTwoText,

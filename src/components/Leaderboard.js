@@ -4,10 +4,6 @@ import {Col, Grid, Row} from "react-flexbox-grid";
 
 import { Card } from 'rmwc/Card'
 class Leaderboard extends Component {
-    constructor(props){
-        super(props);
-    }
-
 
     render(){
         const { userDetails } = this.props;
@@ -32,7 +28,7 @@ class Leaderboard extends Component {
 
     leaderBoardCard(userName, userURL, questionsAsked, questionsAnswered){
         return (
-            <Card>
+            <Card key = {`leaderboardCardKey:$(userName)`}>
                 <br/>
                 <Grid fluid>
                         <Row>

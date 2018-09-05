@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import QuestionCard from "./QuestionCard";
-import { CONST_DETAILS_MODE, CONST_NORMAL_MODE } from "./QuestionCard";
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import QuestionCard, {CONST_NORMAL_MODE} from "./QuestionCard";
 
 export const CONST_All_Questions = "CONST_ALL_QUESTIONS";
 export const CONST_UNANSWERED_ONLY = "CONST_UNANSWERED_ONLY";

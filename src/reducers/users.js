@@ -1,4 +1,4 @@
-import { RECEIVE_USER, ADD_USER_ANSWER, ADD_USER } from "../actions/users";
+import { ADD_USER_ANSWER, RECEIVE_USER} from "../actions/users";
 
 
 export function users(state={}, action){
@@ -15,8 +15,8 @@ export function users(state={}, action){
                 ...state,
                 [authedUser]: {
                     ...state[authedUser],
-                    ["answers"]: {
-                        ...state[authedUser]["answers"],
+                    answers : {
+                        ...state[authedUser].answers,
                         [qid]: answer
                     }
                 }

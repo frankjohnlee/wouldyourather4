@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-import { Card, CardMedia, CardPrimaryAction, CardMediaContent} from 'rmwc/Card';
-import { Typography } from 'rmwc/Typography';
-import {NavLink, withRouter} from "react-router-dom";
-import { authedUser } from "../reducers/authedUser";
-import { setAuthedUser } from "../actions/authedUser";
+import {Card, CardMedia, CardMediaContent, CardPrimaryAction} from 'rmwc/Card';
+import {Typography} from 'rmwc/Typography';
+import {NavLink} from "react-router-dom";
+import {setAuthedUser} from "../actions/authedUser";
 
 
 class Login extends React.Component {
