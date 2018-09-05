@@ -16,11 +16,15 @@ import MaterialIcon from '@material/react-material-icon';
 import Login from './Login'
 import CreateQuestion from './CreateQuestion'
 import AnsweredAndUnAnswered from "./AnsweredAndUnAnswered"
+import {Snackbar} from "rmwc/Snackbar";
+import Leaderboard from "./Leaderboard"
 class App extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			dismissibleOpen: true,
+            snackbarStartIsOpen: false,
+            snackbarMessage: "Your question was created!"
 		}
 	}
 
@@ -130,11 +134,20 @@ class App extends Component {
 												<Route path = '/question/:id'  render={()=><QuestionCard mode = { CONST_DETAILS_MODE }/>}/>
 												<Route path = '/create'  render={()=><CreateQuestion reloadData = {this.updateAPP.bind(this)}/>}/>
 												<Route path = '/logout-login'  render={()=><Login/>}/>
+                                                <Route path = '/leaderboard'  render={()=><Leaderboard/>}/>
 										</Switch>
 							}
 					</Col>
 				</Row>
 			</Grid>
+           <Snackbar
+                  show={this.state.snackbarStartIsOpen}
+                  onHide={evt => this.setState({snackbarStartIsOpen: false})}
+                  message={this.state.snackBarMessage}
+                  actionText="Dismiss"
+                  actionHandler={() => {}}
+                  alignStart
+                />
 			</div>
 		</Router>
 

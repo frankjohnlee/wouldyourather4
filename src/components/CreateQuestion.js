@@ -56,14 +56,7 @@ class CreateQuestion extends React.Component {
                         </NavLink>
                 </div>
                 </center>
-                <Snackbar
-                  show={this.state.snackbarStartIsOpen}
-                  onHide={evt => this.setState({snackbarStartIsOpen: false})}
-                  message="Your question was successfully created!"
-                  actionText="Dismiss"
-                  actionHandler={() => {}}
-                  alignStart
-                />
+
             </div>
 
         )
@@ -75,7 +68,6 @@ class CreateQuestion extends React.Component {
             question: "",
             optionOne: "",
             optionTwo: "",
-            snackbarStartIsOpen: true
         })
     }
 
