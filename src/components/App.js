@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Link, Route, Switch, Redirect} from 'react-router-dom'
 import {ListDivider, ListItem, ListItemGraphic} from 'rmwc/List';
 import {handleInitialData} from '../actions/shared'
 import {connect} from 'react-redux';
@@ -17,7 +17,7 @@ import Leaderboard from "./Leaderboard"
 import QuestionListAll from "./QuestionListAll"
 import QuestionListAnswered from "./QuestionListAnswered"
 import QuestionListUnanswered from "./QuestionListUnanswered"
-
+import NoMatch from "./NoMatch"
 class App extends Component {
 	constructor(props){
 		super(props);
@@ -133,9 +133,10 @@ class App extends Component {
 												<Route path = '/unanswered'  render={()=><QuestionListUnanswered/>}/>
 												<Route path = '/all'  render={()=><QuestionListAll /> }/>
 												<Route path = '/question/:id'  render={()=><QuestionCard mode = { CONST_DETAILS_MODE }/>}/>
-												<Route path = '/create'  render={()=><CreateQuestion reloadData = {this.updateAPP.bind(this)}/>}/>
+												<Route path = '/create'  render={()=><CreateQuestion/>}/>
 												<Route path = '/logout-login'  render={()=><Login/>}/>
                                                 <Route path = '/leaderboard'  render={()=><Leaderboard/>}/>
+                                                <Route path render = {() => <NoMatch/>}/>
 										</Switch>
 							}
 					</Col>
@@ -147,29 +148,10 @@ class App extends Component {
 
 	);
   }
-	updateAPP(){
-		this.forceUpdate()
-	}
 
 
 
 }
-
-// function reactRouting(loggedIn){
-//     return (
-//         <Switch>
-//         <Route exact path="/" render={() => (
-//             loggedIn
-//                 ? (<Redirect to="/login"/>)
-//                 : ( <PublicHomePage/> ))}/>
-//         </Switch>
-//     )
-// }
-//
-// function individualRedirect(){
-//
-// }
-
 function mapStateToProps({authedUser, users}){
 	let name = "";
 	if (users[authedUser] !== undefined){

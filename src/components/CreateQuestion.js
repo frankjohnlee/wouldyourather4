@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {NavLink} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {Button} from 'rmwc/Button';
 import {addNewQuestion} from "../actions/questions";
 import TextField, {HelperText, Input} from '@material/react-text-field';
@@ -97,4 +97,4 @@ function mapStateToProps({users, authedUser}){
        users, authedUser
    }
 }
-export default connect(mapStateToProps)(CreateQuestion);
+export default withRouter(connect(mapStateToProps)(CreateQuestion));

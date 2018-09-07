@@ -25,7 +25,6 @@ class Leaderboard extends Component {
 
         )
     }
-
     leaderBoardCard(userName, userURL, questionsAsked, questionsAnswered){
         return (
             <Card key = {`leaderboardCardKey:$(userName)`}>
@@ -76,21 +75,21 @@ class Leaderboard extends Component {
     }
 
 }
-    function mapStateToProps({users}){
-    const userDetails = Object.keys(users)
-        .map((user) => {
-          const tempUserDetails = {
-            imageURL: users[user].avatarURL,
-            userName: users[user].name,
-            questionsAnswered: Object.keys(users[user].answers).length,
-            questionsPosted: users[user].questions.length,
-          };
-          const rank = tempUserDetails.questionsAnswered + tempUserDetails.questionsPosted;
-          tempUserDetails.userRank = rank;
-          return (tempUserDetails);
-        })
-         .sort((a, b) => ( b.userRank - a.userRank ));
-        return { userDetails };
+function mapStateToProps({users}){
+        const userDetails = Object.keys(users)
+            .map((user) => {
+              const tempUserDetails = {
+                imageURL: users[user].avatarURL,
+                userName: users[user].name,
+                questionsAnswered: Object.keys(users[user].answers).length,
+                questionsPosted: users[user].questions.length,
+              };
+              const rank = tempUserDetails.questionsAnswered + tempUserDetails.questionsPosted;
+              tempUserDetails.userRank = rank;
+              return (tempUserDetails);
+            })
+             .sort((a, b) => ( b.userRank - a.userRank ));
+            return { userDetails };
     }
 
 export default connect(mapStateToProps)(Leaderboard)
