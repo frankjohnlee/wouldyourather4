@@ -27,7 +27,7 @@ class Leaderboard extends Component {
     }
     leaderBoardCard(userName, userURL, questionsAsked, questionsAnswered){
         return (
-            <Card key = {`leaderboardCardKey:$(userName)`}>
+            <Card key = {`leaderboardCardKey-${userName}`}>
                 <br/>
                 <Grid fluid>
                         <Row>

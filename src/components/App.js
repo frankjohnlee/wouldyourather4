@@ -136,7 +136,7 @@ class App extends Component {
 												<Route path = '/create'  render={()=><CreateQuestion/>}/>
 												<Route path = '/logout-login'  render={()=><Login/>}/>
                                                 <Route path = '/leaderboard'  render={()=><Leaderboard/>}/>
-                                                <Route path render = {() => <NoMatch/>}/>
+                                                <Route render = {() => <NoMatch/>}/>
 										</Switch>
 							}
 					</Col>
