@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
 import {ListDivider, ListItem, ListItemGraphic} from 'rmwc/List';
 import {handleInitialData} from '../actions/shared'
 import {connect} from 'react-redux';
-import Dashboard, {CONST_ANSWERED_ONLY, CONST_UNANSWERED_ONLY} from "./QuestionList";
 import {DrawerContent} from 'rmwc/Drawer';
 import {Col, Grid, Row} from "react-flexbox-grid";
 import QuestionCard, {CONST_DETAILS_MODE} from "./QuestionCard"
@@ -15,6 +14,9 @@ import CreateQuestion from './CreateQuestion'
 import AnsweredAndUnAnswered from "./AnsweredAndUnAnswered"
 import {Snackbar} from "rmwc/Snackbar";
 import Leaderboard from "./Leaderboard"
+import QuestionListAll from "./QuestionListAll"
+import QuestionListAnswered from "./QuestionListAnswered"
+import QuestionListUnanswered from "./QuestionListUnanswered"
 
 class App extends Component {
 	constructor(props){
@@ -37,6 +39,7 @@ class App extends Component {
 	if (authedUser === null){
 	   loginText = "Login"
 	}
+	const loggedIn = this.props.loading;
 
 	return (
 		<Router>
@@ -125,10 +128,10 @@ class App extends Component {
 									? <Login />
 									:
 										<Switch>
-												<Route path = '/' exact render={ () => <AnsweredAndUnAnswered /> }/>
-												<Route path = '/answered'  render={()=><Dashboard mode = { CONST_ANSWERED_ONLY }/>}/>
-												<Route path = '/unanswered'  render={()=><Dashboard mode = { CONST_UNANSWERED_ONLY }/>}/>
-												<Route path = '/all'  render={()=><AnsweredAndUnAnswered /> }/>
+												<Route path = '/' exact render={ () => <AnsweredAndUnAnswered/> }/>
+												<Route path = '/answered'  render={()=><QuestionListAnswered/>}/>
+												<Route path = '/unanswered'  render={()=><QuestionListUnanswered/>}/>
+												<Route path = '/all'  render={()=><QuestionListAll /> }/>
 												<Route path = '/question/:id'  render={()=><QuestionCard mode = { CONST_DETAILS_MODE }/>}/>
 												<Route path = '/create'  render={()=><CreateQuestion reloadData = {this.updateAPP.bind(this)}/>}/>
 												<Route path = '/logout-login'  render={()=><Login/>}/>
@@ -138,14 +141,7 @@ class App extends Component {
 					</Col>
 				</Row>
 			</Grid>
-           <Snackbar
-                  show={this.state.snackbarStartIsOpen}
-                  onHide={evt => this.setState({snackbarStartIsOpen: false})}
-                  message={this.state.snackBarMessage}
-                  actionText="Dismiss"
-                  actionHandler={() => {}}
-                  alignStart
-                />
+
 			</div>
 		</Router>
 
@@ -155,7 +151,24 @@ class App extends Component {
 		this.forceUpdate()
 	}
 
+
+
 }
+
+// function reactRouting(loggedIn){
+//     return (
+//         <Switch>
+//         <Route exact path="/" render={() => (
+//             loggedIn
+//                 ? (<Redirect to="/login"/>)
+//                 : ( <PublicHomePage/> ))}/>
+//         </Switch>
+//     )
+// }
+//
+// function individualRedirect(){
+//
+// }
 
 function mapStateToProps({authedUser, users}){
 	let name = "";

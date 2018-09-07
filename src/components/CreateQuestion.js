@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 import {Button} from 'rmwc/Button';
 import {addNewQuestion} from "../actions/questions";
 import TextField, {HelperText, Input} from '@material/react-text-field';
+import {Snackbar} from "rmwc/Snackbar";
 
 class CreateQuestion extends React.Component {
     constructor(props){
@@ -11,7 +12,8 @@ class CreateQuestion extends React.Component {
         this.state = {
             optionOne: "",
             optionTwo: "",
-            snackbarStartIsOpen: false
+            snackbarStartIsOpen: false,
+            snackbarMessage: "Sorry you can't leave any option empty!"
         }
 
     }
@@ -41,22 +43,36 @@ class CreateQuestion extends React.Component {
                 </div>
                 <div>
                     <br/><br/>
-                        <NavLink to={"/"}>
                             <Button outlined
-                             onClick = {() => this.handleSubmit()}>
+                             onClick = {(e) => this.handleSubmit(e)}>
                                 Add Question
                             </Button>
-                        </NavLink>
+
                 </div>
                 </center>
+                <Snackbar
+                  show={this.state.snackbarStartIsOpen}
+                  onHide={evt => this.setState({snackbarStartIsOpen: false})}
+                  message={this.state.snackbarMessage}
+                  actionText="Dismiss"
+                  actionHandler={() => {}}
+                  alignStart
+                />
 
             </div>
 
         )
     }
-    handleSubmit(){
-        this.props.dispatch(addNewQuestion(this.state.optionOne, this.state.optionTwo));
-        this.props.reloadData();
+    handleSubmit(e){
+        e.preventDefault();
+        if (this.state.optionOne === "" || this.state.optionTwo === ""){
+            this.setState({snackbarStartIsOpen: true })
+        }
+        else {
+            this.props.dispatch(addNewQuestion(this.state.optionOne, this.state.optionTwo));
+            this.props.history.push("/")
+        }
+
         this.setState({
             optionOne: "",
             optionTwo: "",

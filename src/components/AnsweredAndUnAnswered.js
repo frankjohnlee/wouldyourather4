@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Col, Grid, Row} from "react-flexbox-grid";
-import QuestionList, {CONST_ANSWERED_ONLY, CONST_UNANSWERED_ONLY} from "./QuestionList";
+import QuestionListAnswered from "./QuestionListAnswered";
+import QuestionListUnanswered from "./QuestionListUnanswered"
 import connect from "react-redux/es/connect/connect";
 
 class AnsweredAndUnAnswered extends Component {
@@ -12,11 +13,11 @@ class AnsweredAndUnAnswered extends Component {
                     <Row>
                         <Col xs={6} md={6}>
                             <center><h3>Unanswered Polls</h3></center>
-                           <QuestionList mode = { CONST_UNANSWERED_ONLY }/>
+                           <QuestionListUnanswered/>
                         </Col>
                         <Col xs={6} md={6}>
                             <center><h3>Answered Polls</h3></center>
-                            <QuestionList mode = { CONST_ANSWERED_ONLY }/>
+                            <QuestionListAnswered/>
                         </Col>
                     </Row>
              </Grid>
