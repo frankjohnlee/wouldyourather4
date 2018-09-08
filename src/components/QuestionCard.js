@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import { handleAddAnswer } from "../actions/shared";
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { Link, withRouter } from "react-router-dom"
-
+import NoMatch from "./NoMatch"
 const CONST_UNANSWERED = "CONST_UNANSWERED";
 const CONST_ANSWERED = "CONST_ANSWERED";
 export const CONST_DETAILS_MODE = "CONST_DETAILS_MODE";
@@ -29,6 +29,10 @@ class QuestionCard extends Component {
     }
 
   render() {
+         // This occurs if the user requests a url with question id that does not make sense
+        if (this.props.question === null){
+            return <NoMatch/>
+        }
         const { currentMode } = this.state;
         const { id, author } = this.props;
         const authorName = author.name;
@@ -36,8 +40,7 @@ class QuestionCard extends Component {
         return (
             <Link
                 className = "question"
-                to = {`/question/${id}`}
-            >
+                to = {`/question/${id}`}>
                  <Grid fluid>
                     <Row>
                         <Col xs={4} md={4}>
@@ -112,6 +115,7 @@ class QuestionCard extends Component {
   Case1Answered(){
         /* returns the component parts for when a case is answered */
         const { question, currentUser, id } = this.props;
+
         // We need the number of people who answered for each option
         const optionOneCount = question.optionOne.votes.length;
         const optionTwoCount = question.optionTwo.votes.length;
@@ -176,9 +180,14 @@ function mapStateToProps({ questions, users, authedUser}, props){
     if (verifiedID === undefined){
         verifiedID = props.match.params.id; // this gets the id from the url since it's formatted id:alksjdlskajd92j
     }
+    let question;
+    let author;
+    if (questions[verifiedID] == undefined){ question = null; author = null; }
+    else {
+        question = questions[verifiedID];
+        author = users[question.author];
+    }
 
-    const question = questions[verifiedID];
-    const author = users[question.author];
 
     return {
         question: question,

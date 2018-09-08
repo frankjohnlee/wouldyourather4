@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { Redirect, withRouter } from 'react-router-dom';
 import {Card, CardMedia, CardMediaContent, CardPrimaryAction} from 'rmwc/Card';
 import {Typography} from 'rmwc/Typography';
 import {NavLink} from "react-router-dom";
@@ -10,7 +11,18 @@ class Login extends React.Component {
 
     render(){
 
-        const { users } = this.props;
+        const { users, authUser } = this.props;
+        let from = '/';
+        if (this.props.location.pathname !== undefined){
+            from = this.props.location.pathname;
+        }
+        console.log("authUser", authUser);
+        console.log("from", from);
+        if (authUser !== undefined) {
+          return (
+            <Redirect to={from} />
+          );
+        }
         return (
             <div>
                 <center><h3>Select User To Login</h3></center>
@@ -30,12 +42,10 @@ class Login extends React.Component {
     }
     makeLoginCard(user){
         return(
-            <NavLink
-                to={'/'}
+
+             <div className="loginCards"
                 value = {`${user}`}
-                onClick = {(e) => this.handleSelection(user)}
-                >
-             <div className="loginCards">
+                onClick = {(e) => this.handleSelection(user)}>
                       <Card style={{ width: '12.5rem' }}>
                           <CardPrimaryAction>
                             <CardMedia
@@ -66,7 +76,6 @@ class Login extends React.Component {
                   </CardPrimaryAction>
                 </Card>
              </div>
-            </NavLink>
             )
 
     }
@@ -75,12 +84,13 @@ class Login extends React.Component {
         const { dispatch } = this.props;
         const { id } = user;
         dispatch(setAuthedUser(id));
+        this.props.history.push(this.props.location.pathname);
     }
 };
 
-function mapStateToProps({users}){
+function mapStateToProps({users, authUser}){
    return {
-       users
+       users, authUser
    }
 }
-export default connect(mapStateToProps)(Login);
+export default withRouter(connect(mapStateToProps)(Login));

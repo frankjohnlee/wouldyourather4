@@ -18,6 +18,7 @@ import QuestionListAll from "./QuestionListAll"
 import QuestionListAnswered from "./QuestionListAnswered"
 import QuestionListUnanswered from "./QuestionListUnanswered"
 import NoMatch from "./NoMatch"
+import PrivateRoute from "./PrivateRoute"
 class App extends Component {
 	constructor(props){
 		super(props);
@@ -36,11 +37,7 @@ class App extends Component {
   render() {
 	const { name, authedUser } = this.props;
 	let loginText = "Logout";
-	if (authedUser === null){
-	   loginText = "Login"
-	}
-	const loggedIn = this.props.loading;
-
+	if (authedUser === null){ loginText = "Login" }
 	return (
 		<Router>
 			<div>
@@ -121,22 +118,24 @@ class App extends Component {
 
 					</Col>
 					<Col xs={7} md={7}>
-							{
-								this.props.loading === true
-									? <Login />
-									:
-										<Switch>
-												<Route path = '/' exact render={ () => <AnsweredAndUnAnswered/> }/>
-												<Route path = '/answered'  render={()=><QuestionListAnswered/>}/>
-												<Route path = '/unanswered'  render={()=><QuestionListUnanswered/>}/>
-												<Route path = '/all'  render={()=><QuestionListAll /> }/>
-												<Route path = '/question/:id'  render={()=><QuestionCard mode = { CONST_DETAILS_MODE }/>}/>
-												<Route path = '/create'  render={()=><CreateQuestion/>}/>
-												<Route path = '/logout-login'  render={()=><Login/>}/>
-                                                <Route path = '/leaderboard'  render={()=><Leaderboard/>}/>
-                                                <Route render = {() => <NoMatch/>}/>
-										</Switch>
-							}
+
+                        {
+                            this.props.loading
+                                ?  <Login/>
+                                :
+                                <Switch>
+                                    <PrivateRoute exact path = '/' exact component = { AnsweredAndUnAnswered}/>
+                                    <PrivateRoute exact path = '/answered' exact component = { QuestionListAnswered }/>
+                                    <PrivateRoute exact path = '/unanswered' exact component = { QuestionListUnanswered }/>
+                                    <PrivateRoute exact path = '/all' exact  component = { QuestionListAll  }/>
+                                    <PrivateRoute exact path = '/question/:id' exact  component = { () => <QuestionCard mode = {CONST_DETAILS_MODE}/>}/>
+                                    <PrivateRoute exact path = '/create' exact component = { CreateQuestion }/>
+                                    <Route exact path = '/logout-login' exact component = { Login }/>
+                                    <PrivateRoute exact path = '/leaderboard' exact component = { Leaderboard }/>
+                                    <PrivateRoute component = { NoMatch }/>
+                                </Switch>
+                        }
+
 					</Col>
 				</Row>
 			</Grid>
