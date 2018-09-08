@@ -44,7 +44,7 @@ class App extends Component {
 	return (
 		<Router>
 			<div>
-			<Toolbar >
+			    <Toolbar >
 					  <ToolbarRow>
 							<ToolbarSection alignStart>
 								  <ToolbarMenuIcon icon="comment"/>
@@ -121,8 +121,6 @@ class App extends Component {
 
 					</Col>
 					<Col xs={7} md={7}>
-
-
 							{
 								this.props.loading === true
 									? <Login />

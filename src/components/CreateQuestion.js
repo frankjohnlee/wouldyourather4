@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from "react-router-dom";
 import {Button} from 'rmwc/Button';
-import {addNewQuestion} from "../actions/questions";
+import { addNewQuestion } from "../actions/shared";
 import TextField, {HelperText, Input} from '@material/react-text-field';
 import {Snackbar} from "rmwc/Snackbar";
 

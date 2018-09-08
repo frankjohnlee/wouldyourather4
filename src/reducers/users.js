@@ -1,4 +1,4 @@
-import { ADD_USER_ANSWER, RECEIVE_USER} from "../actions/users";
+import { ADD_USER_ANSWER, RECEIVE_USER, ADD_QUESTION_USER } from "../actions/users";
 
 
 export function users(state={}, action){
@@ -22,7 +22,21 @@ export function users(state={}, action){
                 }
 
             };
+        case ADD_QUESTION_USER:
+            const { question } = action;
+            const { author, id } = question;
+            return {
+                ...state,
+                [author]: {
+                    ...state[author],
+                    answers: {
+                        ...state[author].answers,
+                        id,
+                    }
 
+                }
+
+            };
         default:
             return state;
     }

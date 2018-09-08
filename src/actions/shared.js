@@ -1,9 +1,9 @@
-import {_saveQuestionAnswer} from "../utils/_DATA";
+import {_saveQuestion, _saveQuestionAnswer} from "../utils/_DATA";
 import { getInitialData } from "../utils/api";
-import {addAnswer, receiveQuestions} from "./questions";
-import { receiveUsers} from "./users";
+import {addAnswer, newQuestion, receiveQuestions} from "./questions";
+import { receiveUsers, newQuestionUser } from "./users";
 import { setAuthedUser } from "./authedUser";
-import { addUserAnswer } from "./users";
+
 
 const AUTHED_ID = null; // should be set to null requiring login
 
@@ -31,7 +31,23 @@ export function handleAddAnswer(qid, answer){
             .then(
                 () =>
                     dispatch(addAnswer(authedUser, qid, answer)) &&
-                    dispatch(addUserAnswer(authedUser, qid, answer))
+                    dispatch(newQuestionUser(authedUser, qid, answer))
             ) // Once this is done then add it to our own state
+    }
+}
+
+export function addNewQuestion(optionOneText, optionTwoText){
+      return (dispatch, getState) => {
+        const { authedUser } = getState();
+         return _saveQuestion({
+              author: authedUser,
+              optionOneText,
+              optionTwoText,
+         })
+        .then(
+            question => dispatch(newQuestion(question))
+                        && dispatch(newQuestionUser(question))
+
+        ) // Once this is done then add it to our own state
     }
 }
