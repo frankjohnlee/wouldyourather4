@@ -40,7 +40,7 @@ class QuestionCard extends Component {
         return (
             <Link
                 className = "question"
-                to = {`/question/${id}`}>
+                to = {`/questions/${id}`}>
                  <Grid fluid>
                     <Row>
                         <Col xs={4} md={4}>

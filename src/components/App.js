@@ -128,7 +128,7 @@ class App extends Component {
                                     <PrivateRoute exact path = '/answered' exact component = { QuestionListAnswered }/>
                                     <PrivateRoute exact path = '/unanswered' exact component = { QuestionListUnanswered }/>
                                     <PrivateRoute exact path = '/all' exact  component = { QuestionListAll  }/>
-                                    <PrivateRoute exact path = '/question/:id' exact  component = { () => <QuestionCard mode = {CONST_DETAILS_MODE}/>}/>
+                                    <PrivateRoute exact path = '/questions/:id' exact  component = { () => <QuestionCard mode = {CONST_DETAILS_MODE}/>}/>
                                     <PrivateRoute exact path = '/create' exact component = { CreateQuestion }/>
                                     <Route exact path = '/logout-login' exact component = { Login }/>
                                     <PrivateRoute exact path = '/leaderboard' exact component = { Leaderboard }/>
