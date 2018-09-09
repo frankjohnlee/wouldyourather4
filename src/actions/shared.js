@@ -43,8 +43,8 @@ export function addNewQuestion(optionOneText, optionTwoText){
               optionTwoText,
          })
         .then(
-            question => dispatch(newQuestion(question))
-                        && dispatch(newQuestionUser(question))
+            question => dispatch(newQuestion(question)) &&  // Add the question to the list of questions
+                        dispatch(newQuestionUser(question)) // Add the question to the user's list of questions
 
         ) // Once this is done then add it to our own state
     }
