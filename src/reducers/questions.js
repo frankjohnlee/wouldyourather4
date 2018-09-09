@@ -8,17 +8,6 @@ export function questions(state={}, action){
                 ...action.questions,
             };
         case ADD_ANSWER:
-            /*
-            * state = {
-            *   qid: {
-            *       author: "johndoe",
-            *       id: qid,
-            *       optionOne:{votes: [], text: "text for option 1"},
-            *       optionTwo: {votes: ["sarahedo"], text: "text for option 2"},
-            *       timestamp: 129383803803802
-            *   }
-            * }
-            * */
             return {
                 ...state,
                 [action.qid]: {
