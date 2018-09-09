@@ -1,7 +1,7 @@
 import {_saveQuestion, _saveQuestionAnswer} from "../utils/_DATA";
 import { getInitialData } from "../utils/api";
 import {addAnswer, newQuestion, receiveQuestions} from "./questions";
-import { receiveUsers, newQuestionUser } from "./users";
+import {receiveUsers, newQuestionUser, addUserAnswer } from "./users";
 import { setAuthedUser } from "./authedUser";
 
 
@@ -18,8 +18,6 @@ export function handleInitialData(){
 
 }
 
-
-
 export function handleAddAnswer(qid, answer){
      return (dispatch, getState) => {
         const { authedUser } = getState();
@@ -31,7 +29,7 @@ export function handleAddAnswer(qid, answer){
             .then(
                 () =>
                     dispatch(addAnswer(authedUser, qid, answer)) &&
-                    dispatch(newQuestionUser(authedUser, qid, answer))
+                    dispatch(addUserAnswer(authedUser, qid, answer))
             ) // Once this is done then add it to our own state
     }
 }
