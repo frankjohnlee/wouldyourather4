@@ -90,7 +90,7 @@ class App extends Component {
 									</ListItem>
 								</Link>
 								<ListDivider />
-								<Link to={'/create'}>
+								<Link to={'/add'}>
 									 <ListItem>
 										<ListItemGraphic icon = "add"/>
 										New Question
@@ -129,7 +129,7 @@ class App extends Component {
                                     <PrivateRoute exact path = '/unanswered' exact component = { QuestionListUnanswered }/>
                                     <PrivateRoute exact path = '/all' exact  component = { QuestionListAll  }/>
                                     <PrivateRoute exact path = '/questions/:id' exact  component = { () => <QuestionCard mode = {CONST_DETAILS_MODE}/>}/>
-                                    <PrivateRoute exact path = '/create' exact component = { CreateQuestion }/>
+                                    <PrivateRoute exact path = '/add' exact component = { CreateQuestion }/>
                                     <Route exact path = '/logout-login' exact component = { Login }/>
                                     <PrivateRoute exact path = '/leaderboard' exact component = { Leaderboard }/>
                                     <PrivateRoute component = { NoMatch }/>
