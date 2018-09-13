@@ -202,4 +202,5 @@ function mapStateToProps({ questions, users, authedUser}, props){
 
 
 }
+
 export default withRouter(connect(mapStateToProps)(QuestionCard));
